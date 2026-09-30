@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SD · MM · FI — The Illustrated Guide</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#e9e2d3;--paper:#fbf7ee;--ink:#2b2620;--mute:#7a6f60;--line:#d9cfba;--sd:#2b6cb0;--mm:#b7791f;--fi:#2f855a;--acc:#8b2e2e;--card:#f3ecdc}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15130f;--paper:#211e18;--ink:#e8e0d0;--mute:#a09580;--line:#3a3529;--sd:#63a4e8;--mm:#e0a94a;--fi:#5fc08a;--acc:#e08a8a;--card:#2a261e}}
+:root[data-theme="dark"]{--bg:#15130f;--paper:#211e18;--ink:#e8e0d0;--mute:#a09580;--line:#3a3529;--sd:#63a4e8;--mm:#e0a94a;--fi:#5fc08a;--acc:#e08a8a;--card:#2a261e}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.75 Georgia,'Times New Roman',serif}
+.book{max-width:760px;margin:0 auto;background:var(--paper);box-shadow:0 0 40px #0003}
+.pg{padding:56px clamp(20px,7vw,64px);border-bottom:1px solid var(--line);position:relative}
+.run{font:11px/1 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin-bottom:28px}
+.cover{min-height:92vh;display:flex;flex-direction:column;justify-content:center;text-align:center;background:linear-gradient(160deg,var(--card),var(--paper))}
+.cover h1{font-size:clamp(34px,8vw,56px);line-height:1.1;margin:.2em 0}
+.cover .sub{color:var(--mute);font-style:italic}
+.cover .orn{letter-spacing:.6em;color:var(--acc)}
+.toc{margin:28px auto 0;text-align:left;max-width:380px;font:15px/2 Arial,sans-serif}
+.toc a{color:var(--ink);text-decoration:none;display:flex;gap:10px;border-bottom:1px dotted var(--line)}
+.toc b{color:var(--acc);width:1.6em}
+.chn{font:700 90px/1 Georgia,serif;color:var(--acc);opacity:.25;margin:0}
+h2{font-size:32px;line-height:1.2;margin:.1em 0 .6em}h3{font-size:20px;margin:1.6em 0 .3em;color:var(--acc)}
+p.lead:first-letter{float:left;font-size:4.2em;line-height:.85;padding:.06em .1em 0 0;color:var(--acc)}
+.tag{display:inline-block;font:700 11px/1 Arial,sans-serif;padding:3px 7px;border-radius:9px;color:#fff;vertical-align:middle}
+.SD{background:var(--sd)}.MM{background:var(--mm)}.FI{background:var(--fi)}
+.note{background:var(--card);border-left:4px solid var(--acc);padding:12px 18px;margin:1.4em 0;font-size:16px;border-radius:0 8px 8px 0}
+.fig{margin:1.6em 0;padding:16px;background:var(--card);border:1px solid var(--line);border-radius:10px}
+.fig svg{width:100%;height:auto;display:block}.fig figcaption{font:italic 13px/1.4 Georgia,serif;color:var(--mute);text-align:center;margin-top:8px}
+svg text{font-family:Arial,sans-serif;fill:var(--ink)}
+.steps{display:flex;flex-direction:column;margin:1.5em 0}
+.st{display:flex;gap:14px;position:relative;padding-bottom:22px}
+.st:not(:last-child):before{content:'';position:absolute;left:23px;top:50px;bottom:2px;border-left:3px dashed var(--line)}
+.ic{flex:none;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-size:22px;color:#fff;border:3px solid var(--paper);box-shadow:0 0 0 2px var(--c)}
+.bx{flex:1;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--c);border-radius:8px;padding:10px 14px;font-size:15px;line-height:1.55}
+.bx b{font-size:16px}.bx .tc{font:12px Consolas,monospace;background:var(--paper);padding:1px 6px;border-radius:4px;border:1px solid var(--line)}
+.post{display:block;margin-top:6px;font:13px Arial,sans-serif;color:var(--mute)}.post i{font-style:normal;font-weight:700;color:var(--ink)}
+.chain{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font:13px Consolas,monospace}
+.chain span{background:var(--paper);border:1px solid var(--line);padding:4px 9px;border-radius:6px}.chain em{color:var(--mute);font-style:normal}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:1.4em 0}
+.cd{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;font-size:15px;line-height:1.5}
+.cd .e{font-size:26px}.cd b{display:block;color:var(--acc);margin:4px 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;font:14px Arial,sans-serif;min-width:100%}td,th{border-bottom:1px solid var(--line);padding:7px 10px;text-align:left}th{color:var(--acc)}
+.end{text-align:center;color:var(--mute)}
+.theme{position:fixed;right:12px;top:calc(12px + env(safe-area-inset-top,0px));font:12px Arial;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:5px 10px;cursor:pointer;z-index:9}
+</style></head><body>
+<button class="theme" onclick="tg()">◐ Theme</button>
+<div class="book">
+
+<section class="pg cover">
+<div class="orn">✦ ✦ ✦</div>
+<div class="run">An illustrated field guide for ABAP consultants</div>
+<h1>SD · MM · FI</h1>
+<p class="sub">How Sales, Materials and Finance talk to each other in SAP — and where your ABAP fits in</p>
+<div class="orn">✦ ✦ ✦</div>
+<div class="toc">
+<a href="#c1"><b>1</b>The Big Picture</a><a href="#c2"><b>2</b>Order-to-Cash: Selling a Bike</a>
+<a href="#c3"><b>3</b>Procure-to-Pay: Buying Materials</a><a href="#c4"><b>4</b>Your ABAP Toolbox</a>
+<a href="#c5"><b>5</b>When Things Break</a><a href="#c6"><b>6</b>The S/4HANA Difference</a><a href="#c7"><b>7</b>Cheat Sheet &amp; Takeaways</a></div>
+</section>
+
+<section class="pg" id="c1"><div class="run">Chapter 1</div><p class="chn">01</p><h2>The Big Picture</h2>
+<p class="lead">SAP is built like a company: every department has a module, and the modules constantly hand each other paperwork. Three of them do the heavy lifting for money and goods. <span class="tag SD">SD</span> sells things, <span class="tag MM">MM</span> buys and stores things, and <span class="tag FI">FI</span> keeps the books.</p>
+<figure class="fig"><svg viewBox="0 0 640 380" role="img" aria-label="SD MM FI integration triangle">
+<g stroke="var(--mute)" stroke-width="2" fill="none"><line x1="320" y1="70" x2="120" y2="300"/><line x1="320" y1="70" x2="520" y2="300"/><line x1="120" y1="300" x2="520" y2="300"/></g>
+<circle cx="320" cy="70" r="46" fill="var(--sd)"/><circle cx="120" cy="300" r="46" fill="var(--mm)"/><circle cx="520" cy="300" r="46" fill="var(--fi)"/>
+<g fill="#fff" font-size="22" font-weight="700" text-anchor="middle"><text x="320" y="78" style="fill:#fff">SD</text><text x="120" y="308" style="fill:#fff">MM</text><text x="520" y="308" style="fill:#fff">FI</text></g>
+<g font-size="12" text-anchor="middle"><text x="320" y="20">Sales &amp; Distribution</text><text x="120" y="362">Materials Management</text><text x="520" y="362">Financial Accounting</text>
+<text x="170" y="170">Material master · ATP</text><text x="170" y="186">Goods issue (601)</text>
+<text x="470" y="170">Billing · VKOA</text><text x="470" y="186">Credit check · Recon. a/c</text>
+<text x="320" y="325">GR/IR · OBYC · Valuation class</text></g>
+<rect x="255" y="185" width="130" height="50" rx="10" fill="var(--paper)" stroke="var(--acc)" stroke-width="2"/><text x="320" y="207" text-anchor="middle" font-size="13" font-weight="700">ACDOCA</text><text x="320" y="224" text-anchor="middle" font-size="11">Universal Journal</text></svg>
+<figcaption>Figure 1 — Each edge is a handshake between two modules; the S/4HANA Universal Journal sits in the middle.</figcaption></figure>
+<p>When these three are wired together you get four gifts: <b>real-time visibility</b> (stock, sales and money update instantly), <b>automation</b> (one transaction triggers the next), <b>auditability</b> (everything is traceable) and <b>agility</b> (one version of the truth for decisions).</p>
+<div class="note">📖 <b>Our running story.</b> <i>Global Bike Inc.</i> sells 7 bicycles to <i>The Bike Zone</i> (Chapter 2), and a manufacturing unit buys 100 units of raw material (Chapter 3). Watch how goods and money move in step.</div></section>
+
+<section class="pg" id="c2"><div class="run">Chapter 2</div><p class="chn">02</p><h2>Order-to-Cash: Selling a Bike</h2>
+<p class="lead">O2C is the journey from “Can you quote me a price?” to “Thanks, the money has arrived.” Follow the dashed road below — each stop is coloured by the module in charge, and the small print shows the ledger entries it creates.</p>
+<div class="steps" id="o2c"></div>
+<figure class="fig"><div class="chain" id="o2cd"></div><figcaption>Figure 2 — The document trail: every step leaves a footprint in these tables.</figcaption></figure>
+<div class="note">💡 <b>Only two steps touch the books</b> in a physical flow: goods issue (stock leaves, cost is booked) and billing (revenue is booked). Quotation and order carry no accounting entries at all.</div>
+<h3>Movement 601 &amp; VKOA in one sentence each</h3>
+<p>Delivery triggers goods movement type <b>601</b> in MM, reducing stock and creating a material document. Billing uses account determination <b>VKOA</b> to map pricing conditions (taxes, discounts, surcharges) to the right G/L accounts.</p></section>
+
+<section class="pg" id="c3"><div class="run">Chapter 3</div><p class="chn">03</p><h2>Procure-to-Pay: Buying Materials</h2>
+<p class="lead">P2P is O2C’s mirror image: instead of giving goods to a customer and waiting for cash, you receive goods from a vendor and eventually pay cash. Here MM leads and FI follows.</p>
+<div class="steps" id="p2p"></div>
+<figure class="fig"><svg viewBox="0 0 640 210" role="img" aria-label="GR/IR clearing">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700">The GR/IR clearing account</text>
+<rect x="30" y="50" width="170" height="110" rx="10" fill="none" stroke="var(--mm)" stroke-width="3"/><text x="115" y="75" text-anchor="middle" font-size="13" font-weight="700">1 · Goods Receipt (MIGO)</text>
+<text x="115" y="100" text-anchor="middle" font-size="12">Dr Inventory (BSX)</text><text x="115" y="120" text-anchor="middle" font-size="12">Cr GR/IR (WRX)</text><text x="115" y="145" text-anchor="middle" font-size="12" style="fill:var(--mm)">balance builds ↑</text>
+<rect x="235" y="50" width="170" height="110" rx="10" fill="none" stroke="var(--fi)" stroke-width="3"/><text x="320" y="75" text-anchor="middle" font-size="13" font-weight="700">2 · Invoice (MIRO)</text>
+<text x="320" y="100" text-anchor="middle" font-size="12">Dr GR/IR</text><text x="320" y="120" text-anchor="middle" font-size="12">Cr Vendor</text><text x="320" y="145" text-anchor="middle" font-size="12" style="fill:var(--fi)">balance clears ↓</text>
+<rect x="440" y="50" width="170" height="110" rx="10" fill="var(--card)" stroke="var(--acc)" stroke-width="3"/><text x="525" y="75" text-anchor="middle" font-size="13" font-weight="700">3 · Result</text>
+<text x="525" y="105" text-anchor="middle" font-size="12">GR/IR = 0 ✔ matched</text><text x="525" y="128" text-anchor="middle" font-size="12">≠ 0 → goods without</text><text x="525" y="145" text-anchor="middle" font-size="12">invoice (or reverse)</text>
+<g fill="var(--acc)" font-size="22"><text x="210" y="112">➜</text><text x="415" y="112">➜</text></g></svg>
+<figcaption>Figure 3 — GR/IR is a “waiting room”: goods and invoices must both arrive before it empties.</figcaption></figure>
+<div class="note">🔑 <b>Three-way match:</b> purchase order, goods receipt and vendor invoice must agree. Price or quantity differences are flagged for resolution. <b>OBYC</b> picks the G/L accounts automatically from valuation class and movement type.</div></section>
+
+<section class="pg" id="c4"><div class="run">Chapter 4</div><p class="chn">04</p><h2>Your ABAP Toolbox</h2>
+<p class="lead">Standard SAP does the plumbing. Your job is to add the company-specific rules — safely. These are the six main entry points.</p>
+<div class="grid">
+<div class="cd"><span class="e">🔌</span><b>User Exits</b>Predefined hooks inside standard programs, e.g. MV45AFZZ (sales orders) and RV60AFZZ (billing).</div>
+<div class="cd"><span class="e">🧩</span><b>Customer Exits</b>Function-module based extension points — add logic without touching standard code.</div>
+<div class="cd"><span class="e">🧱</span><b>BADIs</b>Object-oriented, multiple implementations allowed. E.g. SD_SLS_MODIFY_HEAD_BUSINESS for order headers.</div>
+<div class="cd"><span class="e">📞</span><b>BAPI</b>Standard function modules to create/change/read business objects, e.g. BAPI_SALESORDER_CREATEFROMDAT2. Custom fields via EXTENSIONIN.</div>
+<div class="cd"><span class="e">✉️</span><b>IDoc &amp; ALE</b>Structured, asynchronous messages between systems; ALE is the framework that distributes them.</div>
+<div class="cd"><span class="e">⚡</span><b>RFC</b>Synchronous calls between SAP systems or with external applications.</div></div>
+<h3>Where they usually bite</h3>
+<p><b>Custom account determination:</b> extend KOMPCV/KOMV and use EXIT_SAPLV60B_001 for special revenue or COGS mapping. <b>Document flow:</b> exits can attach custom attributes or external documents for traceability. <b>Error handling:</b> catch missing account determination or blocked invoices <i>before</i> they hit FI.</p></section>
+
+<section class="pg" id="c5"><div class="run">Chapter 5</div><p class="chn">05</p><h2>When Things Break</h2>
+<p class="lead">Most integration incidents fall into three families. Learn the symptom, and you already know where to look.</p>
+<div class="grid">
+<div class="cd"><span class="e">🚫</span><b>Account determination fails</b>Goods receipt or billing stops. Check valuation class, transaction key and account assignment group in <b>OBYC</b> (MM-FI) or <b>VKOA</b> (SD-FI).</div>
+<div class="cd"><span class="e">🕸️</span><b>Document flow is broken</b>Statuses and reports go wrong. Use correction reports such as SDVBUK00, and exits to repair the flow.</div>
+<div class="cd"><span class="e">⚖️</span><b>GR/IR won’t clear</b>Goods and invoices disagree. Reconcile the open items regularly.</div></div>
+<div class="note">🧰 <b>Detective kit:</b> VFX3 (release billing to accounting) · FB03 (display accounting doc) · FBL5N / FBL1N (customer / vendor line items) · SM37 (background jobs) · MB51 (goods movements) · FS10N (G/L balances).</div></section>
+
+<section class="pg" id="c6"><div class="run">Chapter 6</div><p class="chn">06</p><h2>The S/4HANA Difference</h2>
+<p class="lead">In classic ECC the same business event was copied into many tables that had to be reconciled. S/4HANA writes it once, into the Universal Journal.</p>
+<figure class="fig"><svg viewBox="0 0 640 200" role="img" aria-label="Classic tables versus ACDOCA">
+<g font-size="13" text-anchor="middle"><text x="110" y="24" font-weight="700">Before (ECC)</text><text x="520" y="24" font-weight="700">S/4HANA</text></g>
+<g font-size="13" font-weight="700" text-anchor="middle"><rect x="30" y="40" width="160" height="34" rx="6" fill="var(--fi)"/><text x="110" y="62" style="fill:#fff">BSEG</text><rect x="30" y="86" width="160" height="34" rx="6" fill="var(--fi)"/><text x="110" y="108" style="fill:#fff">BSIS</text><rect x="30" y="132" width="160" height="34" rx="6" fill="var(--mm)"/><text x="110" y="154" style="fill:#fff">COEP</text></g>
+<g stroke="var(--acc)" stroke-width="3" fill="none"><path d="M195 57 L400 100"/><path d="M195 103 L400 103"/><path d="M195 149 L400 108"/></g>
+<rect x="400" y="60" width="240" height="86" rx="12" fill="var(--acc)"/><text x="520" y="100" text-anchor="middle" font-size="20" font-weight="700" style="fill:#fff">ACDOCA</text><text x="520" y="124" text-anchor="middle" font-size="12" style="fill:#fff">FI · CO · MM · SD in one table</text></svg>
+<figcaption>Figure 4 — Classic tables become views on ACDOCA; your enhancements and reports must adapt to the new data model.</figcaption></figure>
+<h3>Advanced ATP (aATP)</h3>
+<p>The availability check grows up: <b>product allocation</b>, <b>backorder processing</b> and <b>supply protection</b>, evaluated at sales-order creation, so scarce stock goes to the right customers and nothing is oversold. In S/4HANA, Business Partner (BP) also replaces separate customer and vendor masters.</p></section>
+
+<section class="pg" id="c7"><div class="run">Chapter 7</div><p class="chn">07</p><h2>Cheat Sheet &amp; Takeaways</h2>
+<div class="tw"><table><tr><th>Module</th><th>Key T-codes</th><th>Key tables</th></tr>
+<tr><td><span class="tag SD">SD</span></td><td>VA01 · VL01N · VF01 · VFX3</td><td>VBAK/VBAP · LIKP/LIPS · VBRK/VBRP</td></tr>
+<tr><td><span class="tag MM">MM</span></td><td>ME51N · ME21N · MIGO · MIRO</td><td>EBAN · EKKO/EKPO · MKPF/MSEG · RBKP/RSEG</td></tr>
+<tr><td><span class="tag FI">FI</span></td><td>FB03 · F-28 · F110 · OBYC · VKOA</td><td>BKPF/BSEG · ACDOCA</td></tr>
+<tr><td>Masters</td><td>—</td><td>MARA/MVKE · KNA1/KNVV · LFA1</td></tr></table></div>
+<h3>Five things to remember</h3>
+<p>① O2C and P2P tie logistics to finance at every step. ② Master data, account determination and movement types decide whether integration works. ③ User exits, BADIs, BAPI, IDoc and RFC are your levers. ④ Test both flows end to end, and test bad master data too. ⑤ In S/4HANA, ACDOCA and aATP simplify the picture.</p>
+<p class="end">✦ ✦ ✦<br><i>End of the illustrated edition</i></p></section>
+</div>
+<script>
+function tg(){var r=document.documentElement,d=r.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');r.setAttribute('data-theme',d=='dark'?'light':'dark')}
+var C={SD:'var(--sd)',MM:'var(--mm)',FI:'var(--fi)'};
+function flow(id,a){document.getElementById(id).innerHTML=a.map(function(s,i){return '<div class="st" style="--c:'+C[s[0]]+'"><div class="ic" style="background:'+C[s[0]]+'">'+s[1]+'</div><div class="bx"><span class="tag '+s[0]+'">'+s[0]+'</span> <b>'+(i+1)+'. '+s[2]+'</b> <span class="tc">'+s[3]+'</span><br>'+s[4]+(s[5]?'<span class="post"><i>Books:</i> '+s[5]+'</span>':'')+'</div></div>'}).join('')}
+flow('o2c',[
+['SD','💬','Inquiry &amp; Quotation','VA11 / VA21','The Bike Zone asks for a price. Strategic documents only.','nothing — no accounting entry'],
+['SD','📝','Sales Order','VA01','Pulls material data from MM, applies pricing, and runs the credit check against FI limits.','nothing yet'],
+['MM','🔍','Availability Check (ATP)','MMBE','Enough stock? Considers current stock, planned receipts and reservations; may trigger procurement or production.',''],
+['SD','🚚','Delivery','VL01N','Determines shipping point, plant and storage location; picking, packing and scheduling.',''],
+['MM','📦','Goods Issue (PGI)','VL02N · MIGO','Stock physically leaves; movement 601. Material doc and accounting doc are created together.','<i>Dr</i> Cost of Goods Sold · <i>Cr</i> Inventory'],
+['FI','🧾','Billing / Invoice','VF01 · FB03','Taxes, discounts and surcharges from the pricing procedure; mapped via VKOA.','Revenue posted · Accounts Receivable up'],
+['FI','💰','Payment Receipt','F-28','The Bike Zone pays; the open AR item is cleared.','<i>Dr</i> Cash · <i>Cr</i> Customer']]);
+flow('p2p',[
+['MM','🙋','Purchase Requisition','ME51N','A department asks for materials or services.','nothing'],
+['MM','📑','Source Determination / RFQ','ME41','Vendors quote; the best offer wins.',''],
+['MM','🤝','Purchase Order','ME21N','Legally binding: material, quantity, price, delivery and payment terms.','nothing yet'],
+['MM','📥','Goods Receipt','MIGO','Inventory goes up; material and accounting documents are created together.','<i>Dr</i> Inventory (BSX) · <i>Cr</i> GR/IR (WRX)'],
+['FI','🔎','Invoice Verification','MIRO','Vendor invoice checked against PO and GR (three-way match); discrepancies flagged.','<i>Dr</i> GR/IR · <i>Cr</i> Vendor'],
+['FI','🏦','Payment','F110 · F-53','Payment run or manual payment clears the vendor liability.','<i>Dr</i> Vendor · <i>Cr</i> Bank']]);
+document.getElementById('o2cd').innerHTML=['VBAK/VBAP<br>order','LIKP/LIPS<br>delivery','MKPF/MSEG<br>material doc','VBRK/VBRP<br>billing','BKPF/BSEG<br>accounting doc'].map(function(x){return '<span>'+x+'</span>'}).join('<em>➜</em>');
+</script>
+</body></html>
